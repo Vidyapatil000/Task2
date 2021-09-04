@@ -11,22 +11,25 @@ import { EmployeeService } from 'src/app/services/employee.service';
 })
 export class EditComponent implements OnInit 
 {
-  id!: number;
-  header!: string;
-  employee :Employee=
+  id: number = 0;
+  header: string = "vidya";
+  employee : Employee=
   {
-         id:0,
+         id: 0,
          name:'',
          email:'',
          phone:0
   };
+  activatedRoute: any;
   constructor( private router:Router, private route:ActivatedRoute , private employeeService : EmployeeService) 
   {}
   ngOnInit(): void
    {
-     this.id = this.route.snapshot.paramMap.get( 'id ');
-     this.header =this.id===0; 'Add Employee' ; 'Edit Employee' ;
-
+    
+     this.employee.id = parseInt(this.activatedRoute.snapshot.paramMap.get('id'));
+     
+     this.header = 'Add Employee' ; 'Edit Employee' ;
+     //this.id===0;
      if(this.id === 0)
      {
        this.employee  = this.employeeService.onGetEmployee(this.id)!;
